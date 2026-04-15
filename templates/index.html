@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡ EDGE-AI LPR — Cyberpunk Security Dashboard</title>
+  <meta name="description" content="Real-time Edge-AI License Plate Recognition Security Dashboard with Li-Fi authentication." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+  <link rel="stylesheet" href="/static/dashboard.css" />
+</head>
+<body>
+  <!-- ═══════════════════  HEADER  ═══════════════════ -->
+  <header class="hdr">
+    <div class="hdr__logo">
+      <span class="hdr__icon">⚡</span>
+      <span class="hdr__title">EDGE<span class="accent">-AI</span> LPR</span>
+    </div>
+    <div class="hdr__sub">CYBERPUNK SECURITY &nbsp;·&nbsp; NEXT-GEN ACCESS CONTROL</div>
+    <div class="hdr__clock" id="clock">00:00:00</div>
+  </header>
+
+  <!-- ═══════════════════  MAIN GRID  ═══════════════════ -->
+  <main class="grid">
+
+    <!-- ── COL 1: Li-Fi Panel ── -->
+    <section class="panel lifi-panel">
+      <h2 class="panel__title">LI-FI PULSE METER</h2>
+
+      <!-- Circular SVG gauge -->
+      <div class="gauge-wrap">
+        <svg class="gauge" viewBox="0 0 120 120">
+          <circle class="gauge__bg"   cx="60" cy="60" r="50" />
+          <circle class="gauge__fill" cx="60" cy="60" r="50" id="gaugeFill" />
+          <text class="gauge__val"  x="60" y="56" id="gaugeVal">0</text>
+          <text class="gauge__unit" x="60" y="72">INTENSITY</text>
+        </svg>
+      </div>
+
+      <!-- State indicator -->
+      <div class="lifi-state" id="lifiState">⬤ LOW</div>
+
+      <!-- 3-pulse dots -->
+      <div class="pulse-dots">
+        <div class="pulse-dot" id="dot0" data-label="1"></div>
+        <div class="pulse-dot" id="dot1" data-label="2"></div>
+        <div class="pulse-dot" id="dot2" data-label="3"></div>
+      </div>
+      <div class="pulse-label">PULSES &nbsp;(3 = UNLOCK)</div>
+    </section>
+
+    <!-- ── COL 2: Video Feed ── -->
+    <section class="panel stream-panel">
+      <h2 class="panel__title">LIVE SURVEILLANCE STREAM</h2>
+      <div class="stream-wrap">
+        <img id="videoFeed" src="/video_feed" alt="Live webcam feed" />
+        <div class="scan-line"></div>
+        <div class="stream-label top-l">● REC</div>
+        <div class="stream-label top-r" id="streamPlate">—</div>
+      </div>
+
+      <!-- Gate status bar -->
+      <div class="gate-bar" id="gateBar">
+        <span class="gate-dot" id="gateDot"></span>
+        <span class="gate-text" id="gateText">GATE: IDLE</span>
+        <span class="gate-ts" id="gateTs"></span>
+      </div>
+
+      <!-- Control buttons -->
+      <div class="btn-row">
+        <button class="btn btn--open"  id="btnForceOpen">⚡ FORCE OPEN</button>
+        <button class="btn btn--reset" id="btnReset">↺ SYSTEM RESET</button>
+      </div>
+    </section>
+
+    <!-- ── COL 3: Vehicle ID Card ── -->
+    <section class="panel id-panel">
+      <h2 class="panel__title">VEHICLE IDENTITY</h2>
+      <div class="id-card" id="idCard">
+        <div class="id-card__plate" id="idPlate">—</div>
+        <div class="id-card__status" id="idStatus">AWAITING SCAN</div>
+        <div class="id-card__stamp" id="idStamp"></div>
+        <div class="id-card__row"><span>TIME</span><span id="idTime">—</span></div>
+        <div class="id-card__row"><span>METHOD</span><span id="idMethod">—</span></div>
+      </div>
+
+      <!-- OCR live readout -->
+      <div class="ocr-box">
+        <div class="ocr-box__label">OCR READING</div>
+        <div class="ocr-box__val" id="ocrVal">—</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════  TERMINAL  ═══════════════════ -->
+  <section class="terminal-wrap">
+    <div class="terminal-header">
+      <span class="t-dot red"></span>
+      <span class="t-dot yellow"></span>
+      <span class="t-dot green"></span>
+      <span class="terminal-title">SYSTEM LOG &mdash; EDGE-AI LPR v2.0</span>
+    </div>
+    <div class="terminal" id="terminal"></div>
+  </section>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

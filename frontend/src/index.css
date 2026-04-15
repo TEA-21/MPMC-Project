@@ -1,0 +1,42 @@
+/* src/index.css — Cyberpunk global styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap');
+
+:root {
+  --cyan:    #00f5ff;
+  --magenta: #ff00c8;
+  --green:   #00ff88;
+  --red:     #ff3860;
+  --amber:   #ffae00;
+  --bg:      #050510;
+  --bg2:     #080820;
+  --glass:   rgba(0, 245, 255, 0.04);
+  --border:  rgba(0, 245, 255, 0.15);
+  --font-hd: 'Orbitron', sans-serif;
+  --font-md: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--cyan);
+  font-family: var(--font-md);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+@keyframes blink     { 0%,100%{opacity:1} 50%{opacity:.15} }
+@keyframes scan      { 0%{top:-3px;opacity:.7} 70%{opacity:.4} 100%{top:100%;opacity:0} }
+@keyframes gatePulse { 0%,100%{box-shadow:0 0 14px rgba(0,255,136,.3)} 50%{box-shadow:0 0 40px rgba(0,255,136,.75)} }
+@keyframes glitch    {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-4px,0) skewX(-3deg); }
+  20%  { clip-path: inset(92% 0 1% 0);  transform: translate( 4px,0) skewX( 3deg); }
+  40%  { clip-path: inset(43% 0 14% 0); transform: translate(-2px,0); }
+  60%  { clip-path: inset(25% 0 58% 0); transform: translate( 3px,0) skewX(-2deg); }
+  80%  { clip-path: inset(54% 0 7% 0);  transform: translate(-4px,0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate( 4px,0) skewX( 2deg); }
+}
