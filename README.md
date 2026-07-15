@@ -55,7 +55,7 @@ MPMC-Project is an **edge-AI powered License Plate Recognition (LPR) system** de
 ### 5. **Predictive Analytics & Occupancy Forecasting**
 - Polynomial regression (degree 4) on historical parking logs
 - 24-hour occupancy prediction with rush-hour detection
-- Matplotlib-based cyberpunk dashboard visualization
+- Cyberpunk dashboard visualization (Matplotlib)
 - Synthetic data generation for cold-start scenarios
 
 ### 6. **Real-Time WebSocket Dashboard**
@@ -172,6 +172,7 @@ pip install -r requirements.txt
 # - ultralytics (YOLOv8)
 # - scikit-learn (ML models)
 # - pandas (data analysis)
+# - numpy==1.26.2
 ```
 
 **Tesseract OCR Setup** (required for plate recognition):
@@ -241,7 +242,6 @@ python dashboard.py
 ```
 
 ### Running Analytics
-
 ```bash
 python predictive_analytics.py
 # Generates 24-hour occupancy forecast
@@ -249,7 +249,6 @@ python predictive_analytics.py
 ```
 
 ### Demo Mode
-
 Test without ESP32 or webcam:
 ```python
 # In server.py, set:
@@ -257,8 +256,10 @@ TEST_MODE = True
 # Uses test_car.jpg for all frames
 ```
 
-### Logging
+> [!IMPORTANT]
+> **Proximity Bypass Removal**: The legacy HC-SR04 proximity-based demo override (which triggered the gate automatically when an object was <10cm from the sensor) has been deprecated and fully removed from `server.py`. All authorization events must now strictly use Whitelisted LPR or VLC/Li-Fi authentication.
 
+### Logging
 Authorized vehicle entries are logged to `parking_log.csv`:
 ```csv
 timestamp,entry
